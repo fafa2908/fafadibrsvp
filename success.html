@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fakhirah & Adib | Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #faf7f2;
+  --door-color: #faf7f2; /* Adjusted pastel for mobile */
+  --primary: #6b4f3f;
+  --secondary: #a1866f;
+}
+
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Poppins', sans-serif; background:var(--bg); color:#333; overflow-x:hidden; }
+
+section { padding:70px 20px; max-width:900px; margin:auto; text-align:center; }
+h1,h2,h3,h4,h5,h6 { font-family:'Playfair Display', serif; color:var(--primary); }
+p { font-size:0.95rem; margin-bottom:10px; }
+
+/* ===== INTRO OVERLAY ===== */
+#introOverlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  perspective: 1200px;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* ===== DOORS ===== */
+.door {
+  position: absolute;
+  top:0;
+  height:100%;
+  width:50%;
+  background: var(--door-color);
+  transition: transform 1.2s ease-in-out;
+  transform-style: preserve-3d;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+}
+.left-door { left:0; transform-origin: left center; border-right:1px solid #ccc; }
+.right-door { right:0; transform-origin: right center; border-left:1px solid #ccc; }
+.left-door.open { transform: rotateY(-90deg); }
+.right-door.open { transform: rotateY(90deg); }
+
+/* ===== WAX STAMP CENTERED ===== */
+.circle-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  text-align: center;
+  z-index: 1001;
+}
+.circle-wrapper img {
+  width: 200px;
+  display: block;
+  transition: transform 0.2s ease, opacity 0.5s ease;
+}
+.circle-wrapper:hover img { transform: scale(1.05); }
+.circle-wrapper:active img { transform: scale(0.9); }
+.intro-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 220px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+/* ===== HERO ===== */
+.hero {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/first_pic.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity:0;
+  transform: scale(1);
+  transition: opacity 1s ease, transform 1.2s ease;
+  position: relative;
+  z-index: 100; /* behind doors */
+  color: white;
+  text-align: center;
+}
+.hero.show {
+  opacity:1;
+  transform: scale(1.02);
+}
+
+/* Hero text fade-up */
+.hero-text {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.hero-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero-text span,
+.hero-text h1,
+.hero-text p {
+  color: white !important;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+/* ===== Fade-in sections for scroll ===== */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== DETAILS & RSVP ===== */
+.details p strong { color: var(--primary); }
+form { max-width:500px; margin:auto; text-align:left; }
+input,select,textarea,button {
+  width:100%; padding:12px; margin-bottom:15px;
+  border-radius:6px; border:1px solid #ccc; font-family:inherit; font-size:0.9rem;
+}
+button { background:var(--primary); color:white; border:none; cursor:pointer; transition:0.3s; }
+button:hover { background:var(--secondary); }
+
+footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
+
+/* ===== PHOTO GALLERY ===== */
+.photo-gallery {
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  gap:10px;
+  padding:20px 0;
+}
+.photo-gallery img {
+  flex:0 0 auto;
+  width:250px;
+  height:150px;
+  object-fit:cover;
+  scroll-snap-align:start;
+  border-radius:8px;
+  transition: transform 0.3s ease;
+}
+.photo-gallery img:hover { transform: scale(1.05); }
+
+@media(max-width:768px){
+  .circle-wrapper img { width: 150px; }
+  .intro-text { top: 180px; }
+  h1 { font-size:2.2rem; }
+  h2 { font-size:1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== INTRO OVERLAY ===== -->
+<div id="introOverlay">
+  <div class="door left-door"></div>
+  <div class="door right-door"></div>
+
+  <!-- Wax stamp only -->
+  <div class="circle-wrapper">
+    <img src="images/fa-khat-stamp.png" alt="Wax Stamp">
+    <div class="intro-text">Tap to enter</div>
+  </div>
+</div>
+
+<!-- ===== BACKGROUND MUSIC ===== -->
+<audio id="bgMusic" loop>
+  <source src="turning_page.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ===== HERO ===== -->
+<section class="hero fade-in-section">
+  <div class="hero-text">
+    <span>The wedding of</span>
+    <h1>Fakhirah & Adib</h1>
+    <p>Saturday, 2 May 2026</p>
+    <p>15 Zulkaedah, 1447H</p>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="fade-in-section">
+  <h2>بِسْــــــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</h2>
+  <h4>NIK ZALIDA BINTI ISMAIL</h4>
+  <p>dan</p>
+  <h4>KELUARGA</h4>
+  <p>dengan penuh rasa hormat dan berbesar hati ingin menjemput Dato’ Seri/ Datin Seri/ Dato’/ Datin/ Tuan/ Puan/Encik/Cik dan pasangan ke majlis walimatulurus puteri kesayangan kami</p>
+  <p style="padding-bottom: 1em;"></p>
+  <h4>NIK NURULFAKHIRAH BINTI SHAMSUL ZUHAIRI</h4>
+  <p></p>
+  <p>dan pilihan hatinya</p>
+  <h4>MUHAMMAD ADIB AIMAN BIN ARSHAD</h4>
+  <p style="padding-bottom: 2em;"></p>
+  <h5>TEMPAT</h5>
+  <p>Grandeur Beling Glasshall, <br/>Sg. Buloh, Selangor</p>
+  <h5>TARIKH</h5>
+  <p>Sabtu, 2 Mei 2026 <br/> 15 Zulkaedah 1447 H </p>
+  <h5>WAKTU</h5>
+  <p>11.00 pagi - 4:00 petang</p>
+</section>
+
+
+<!-- ===== DETAILS ===== -->
+<section class="details fade-in-section">
+  <h2>ATUR CARA MAJLIS</h2>
+  <p><strong>11.00AM</strong> Jamuan makan</p>
+  <p><strong>12.30PM</strong> Ketibaan pengantin</p>
+  <p><strong>4.00PM</strong>Majlis tamat</p>
+</section>
+
+<!-- ===== PHOTO SECTION ===== -->
+<section class="fade-in-section">
+  <div class="photo-gallery">
+    <img src="images/sec_pic.jpeg" alt="Second Pic">
+    <img src="images/third_pic.jpg" alt="Third Pic">
+    <img src="images/fourth_pic.jpg" alt="Fourth Pic">
+    <img src="images/sec_pic.jpeg" alt="Fourth Pic">
+    <img src="images/fourth_pic.jpg" alt="Fourth Pic">
+  </div>
+  <p>Ya Allah Ya Rahman Ya Rahim, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmatMu kepada kedua mempelai ini. Kurniakanlah mereka kelak zuriat yang soleh dan solehah. Kekalkanlah jodoh mereka hingga ke jannah.</p>
+</section>
+<!--<section class="fade-in-section">
+  <p>Ya Allah Ya Rahman Ya Rahim, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmatMu kepada kedua mempelai ini. Kurniakanlah mereka kelak zuriat yang soleh dan solehah. Kekalkanlah jodoh mereka hingga ke jannah.</p>
+</section>-->
+
+<!-- ===== RSVP ===== -->
+<section class="fade-in-section">
+  <h2>RSVP</h2>
+  <p>Please let us know if you’ll be joining us</p>
+  <form>
+    <input type="text" name="fullName" placeholder="Full Name" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <select name="attendance" required>
+      <option value="">Will you attend?</option>
+      <option value="Yes">Yes, happily!</option>
+      <option value="No">Sorry, can’t make it</option>
+    </select>
+    <select name="pax">
+      <option value="">Number of Pax</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+    <textarea name="message" placeholder="Dietary restrictions / Message (optional)"></textarea>
+    <button type="submit">Submit RSVP</button>
+  </form>
+</section>
+
+<footer class="fade-in-section">
+  <p>We can’t wait to celebrate our special day with you 🤍</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const circleWrapper = document.querySelector(".circle-wrapper");
+  const leftDoor = document.querySelector(".left-door");
+  const rightDoor = document.querySelector(".right-door");
+  const intro = document.getElementById("introOverlay");
+  const hero = document.querySelector(".hero");
+  const heroText = document.querySelector(".hero-text");
+  const music = document.getElementById("bgMusic");
+
+  circleWrapper.addEventListener("click", () => {
+    music.play().catch(() => console.log("User interaction required for music"));
+
+    // Fade out stamp and text
+    circleWrapper.querySelector("img").style.opacity = 0;
+    circleWrapper.querySelector(".intro-text").style.opacity = 0;
+
+    // Open doors
+    leftDoor.classList.add("open");
+    rightDoor.classList.add("open");
+
+    // Wait until doors fully open, then show hero
+    setTimeout(() => {
+      hero.classList.add("show");
+      heroText.classList.add("visible");
+      intro.style.display = "none";
+    }, 1200);
+  });
+
+  // Scroll fade-in
+  const faders = document.querySelectorAll(".fade-in-section");
+  const options = { threshold: 0.2 };
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, options);
+
+  faders.forEach(fader => observer.observe(fader));
+});
+</script>
+
+</body>
+</html>
