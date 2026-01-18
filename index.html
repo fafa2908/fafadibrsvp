@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fakhirah & Adib | Wedding</title>
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
   --bg: #faf7f2;
-  --door-color: #faf7f2; /* Adjusted pastel for mobile */
+  --door-color: #faf7f2;
   --primary: #6b4f3f;
   --secondary: #a1866f;
 }
@@ -23,146 +26,140 @@ section { padding:70px 20px; max-width:900px; margin:auto; text-align:center; }
 h1,h2,h3,h4,h5,h6 { font-family:'Playfair Display', serif; color:var(--primary); }
 p { font-size:0.95rem; margin-bottom:10px; }
 
-/* ===== INTRO OVERLAY ===== */
+/* ================= INTRO OVERLAY ================= */
 #introOverlay {
   position: fixed;
   inset: 0;
   background: var(--bg);
-  perspective: 1200px;
   z-index: 9999;
   overflow: hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-/* ===== DOORS ===== */
+/* ================= DOORS ================= */
 .door {
-  position: absolute;
+  position:absolute;
   top:0;
-  height:100%;
   width:50%;
+  height:100%;
   background: var(--door-color);
-  transition: transform 1.2s ease-in-out;
-  transform-style: preserve-3d;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+  transform-origin: center;
+  transition: transform 1.2s ease-in-out, opacity 1s ease;
+  z-index:9999;
 }
 .left-door { left:0; transform-origin: left center; border-right:1px solid #ccc; }
 .right-door { right:0; transform-origin: right center; border-left:1px solid #ccc; }
-.left-door.open { transform: rotateY(-90deg); }
-.right-door.open { transform: rotateY(90deg); }
+.left-door.open { transform: rotateY(-90deg); opacity:0; }
+.right-door.open { transform: rotateY(90deg); opacity:0; }
 
-/* ===== WAX STAMP CENTERED ===== */
+/* ================= WAX STAMP ================= */
 .circle-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  text-align: center;
-  z-index: 1001;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  cursor:pointer;
+  text-align:center;
+  z-index: 10000;
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 .circle-wrapper img {
-  width: 200px;
-  display: block;
-  transition: transform 0.2s ease, opacity 0.5s ease;
+  width:200px;
+  display:block;
+  animation: floatStamp 3s ease-in-out infinite;
 }
-.circle-wrapper:hover img { transform: scale(1.05); }
-.circle-wrapper:active img { transform: scale(0.9); }
-.intro-text {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  top: 220px;
-  font-size: 13px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--secondary);
-}
+@keyframes floatStamp { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
+.intro-text { margin-top:10px; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--secondary); }
 
-/* ===== HERO ===== */
+/* ================= HERO ================= */
 .hero {
+  position: relative;
   min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/first_pic.jpeg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  text-align:center;
+  color:white;
+  overflow:hidden;
   opacity:0;
-  transform: scale(1);
-  transition: opacity 1s ease, transform 1.2s ease;
-  position: relative;
-  z-index: 100; /* behind doors */
-  color: white;
-  text-align: center;
-}
-.hero.show {
-  opacity:1;
-  transform: scale(1.02);
+  transition: opacity 1s ease;
 }
 
-/* Hero text fade-up */
+.hero.show { opacity:1; }
+
+.hero-video video {
+  position:absolute;
+  top:50%;
+  left:50%;
+  min-width:100%;
+  min-height:100%;
+  width:auto;
+  height:auto;
+  transform:translate(-50%, -50%);
+  z-index:-1;
+  object-fit:cover;
+}
+
+/* Hero text */
 .hero-text {
-  opacity: 0;
+  position: relative;
+  z-index:1;
+  opacity:0;
   transform: translateY(30px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
+  transition: opacity 1s ease, transform 1s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
-.hero-text.visible {
-  opacity: 1;
-  transform: translateY(0);
+.hero-text.visible { opacity:1; transform: translateY(0); }
+.hero-text span {
+  font-family: 'Source Serif 4', serif;
+  font-weight:400;
+  font-size:1.2rem;
+  margin-bottom:10px;
+  color:white;
+  text-transform: uppercase;
 }
-.hero-text span,
-.hero-text h1,
+.hero-text h1 {
+  font-family:'Birthstone', cursive;
+  font-size:4.5rem;
+  line-height:0.9;
+  margin:0;
+  color:white;
+}
 .hero-text p {
-  color: white !important;
-  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+  font-family:'Source Serif 4', serif;
+  font-size:1.2rem;
+  margin-top:10px;
+  color:white;
 }
 
-/* ===== Fade-in sections for scroll ===== */
-.fade-in-section {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-.fade-in-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ================= FADE-IN SECTIONS ================= */
+.fade-in-section { opacity:0; transform:translateY(30px); transition: opacity 1s ease-out, transform 1s ease-out; }
+.fade-in-section.visible { opacity:1; transform:translateY(0); }
 
-/* ===== DETAILS & RSVP ===== */
+/* ================= DETAILS & RSVP ================= */
 .details p strong { color: var(--primary); }
 form { max-width:500px; margin:auto; text-align:left; }
-input,select,textarea,button {
-  width:100%; padding:12px; margin-bottom:15px;
-  border-radius:6px; border:1px solid #ccc; font-family:inherit; font-size:0.9rem;
-}
+input,select,textarea,button { width:100%; padding:12px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; font-family:inherit; font-size:0.9rem; }
 button { background:var(--primary); color:white; border:none; cursor:pointer; transition:0.3s; }
 button:hover { background:var(--secondary); }
 
 footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
 
-/* ===== PHOTO GALLERY ===== */
-.photo-gallery {
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  gap:10px;
-  padding:20px 0;
-}
-.photo-gallery img {
-  flex:0 0 auto;
-  width:250px;
-  height:150px;
-  object-fit:cover;
-  scroll-snap-align:start;
-  border-radius:8px;
-  transition: transform 0.3s ease;
-}
+/* ================= PHOTO GALLERY ================= */
+.photo-gallery { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:10px; padding:20px 0; }
+.photo-gallery img { flex:0 0 auto; width:250px; height:150px; object-fit:cover; scroll-snap-align:start; border-radius:8px; transition: transform 0.3s ease; }
 .photo-gallery img:hover { transform: scale(1.05); }
 
+/* ================= MOBILE ================= */
 @media(max-width:768px){
-  .circle-wrapper img { width: 150px; }
-  .intro-text { top: 180px; }
+  .circle-wrapper img { width:150px; }
+  .hero-text h1 { font-size:3rem; }
+  .hero-text p { font-size:1rem; }
   h1 { font-size:2.2rem; }
   h2 { font-size:1.5rem; }
 }
@@ -170,25 +167,31 @@ footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
 </head>
 <body>
 
-<!-- ===== INTRO OVERLAY ===== -->
+<!-- INTRO OVERLAY -->
 <div id="introOverlay">
   <div class="door left-door"></div>
   <div class="door right-door"></div>
 
-  <!-- Wax stamp only -->
   <div class="circle-wrapper">
     <img src="images/fa-khat-stamp.png" alt="Wax Stamp">
     <div class="intro-text">Tap to enter</div>
   </div>
 </div>
 
-<!-- ===== BACKGROUND MUSIC ===== -->
+<!-- BACKGROUND MUSIC -->
 <audio id="bgMusic" loop>
   <source src="turning_page.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ===== HERO ===== -->
+<!-- HERO SECTION -->
 <section class="hero fade-in-section">
+  <div class="hero-video">
+    <video autoplay muted loop playsinline>
+      <source src="images/first_vid.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
   <div class="hero-text">
     <span>The wedding of</span>
     <h1>Fakhirah & Adib</h1>
@@ -197,70 +200,84 @@ footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
   </div>
 </section>
 
-<!-- ===== STORY ===== -->
+<!-- STORY SECTION -->
 <section class="fade-in-section">
   <h2>بِسْــــــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</h2>
   <h4>NIK ZALIDA BINTI ISMAIL</h4>
   <p>dan</p>
   <h4>KELUARGA</h4>
-  <p>dengan penuh rasa hormat dan berbesar hati ingin menjemput Dato’ Seri/ Datin Seri/ Dato’/ Datin/ Tuan/ Puan/Encik/Cik dan pasangan ke majlis walimatulurus puteri kesayangan kami</p>
-  <p style="padding-bottom: 1em;"></p>
-  <h4>NIK NURULFAKHIRAH BINTI SHAMSUL ZUHAIRI</h4>
-  <p></p>
+  <p>
+    dengan penuh rasa hormat dan berbesar hati ingin menjemput
+    Dato’ Seri/ Datin Seri/ Dato’/ Datin/ Tuan/ Puan/ Encik/ Cik
+    dan pasangan ke majlis walimatulurus puteri kesayangan kami
+  </p>
+
+  <h4 style="margin-top:20px;">NIK NURULFAKHIRAH BINTI SHAMSUL ZUHAIRI</h4>
   <p>dan pilihan hatinya</p>
   <h4>MUHAMMAD ADIB AIMAN BIN ARSHAD</h4>
-  <p style="padding-bottom: 2em;"></p>
-  <h5>TEMPAT</h5>
-  <p>Grandeur Beling Glasshall, <br/>Sg. Buloh, Selangor</p>
+
+  <h5 style="margin-top:25px;">TEMPAT</h5>
+  <p>Grandeur Beling Glasshall<br>Sg. Buloh, Selangor</p>
+
   <h5>TARIKH</h5>
-  <p>Sabtu, 2 Mei 2026 <br/> 15 Zulkaedah 1447 H </p>
+  <p>Sabtu, 2 Mei 2026<br>15 Zulkaedah 1447H</p>
+
   <h5>WAKTU</h5>
-  <p>11.00 pagi - 4:00 petang</p>
+  <p>11.00 pagi – 4.00 petang</p>
 </section>
 
-
-<!-- ===== DETAILS ===== -->
+<!-- DETAILS -->
 <section class="details fade-in-section">
-  <h2>ATUR CARA MAJLIS</h2>
-  <p><strong>11.00AM</strong> Jamuan makan</p>
-  <p><strong>12.30PM</strong> Ketibaan pengantin</p>
-  <p><strong>4.00PM</strong>Majlis tamat</p>
+  <h2 style="padding-bottom: 2em;">ATUR CARA MAJLIS</h2>
+  <p><strong>11.00 AM: </strong> Jamuan makan</p>
+  <p><strong>12.30 PM: </strong> Ketibaan pengantin</p>
+  <p><strong>1.30 PM: </strong> Makan Beradab</p>
+  <p><strong>2.00 PM: </strong> Sesi Fotografi</p>
+  <p><strong>4.00 PM</strong> Majlis tamat</p>
 </section>
 
-<!-- ===== PHOTO SECTION ===== -->
+<!-- PHOTOS -->
 <section class="fade-in-section">
   <div class="photo-gallery">
-    <img src="images/sec_pic.jpeg" alt="Second Pic">
-    <img src="images/third_pic.jpg" alt="Third Pic">
-    <img src="images/fourth_pic.jpg" alt="Fourth Pic">
-    <img src="images/sec_pic.jpeg" alt="Fourth Pic">
-    <img src="images/fourth_pic.jpg" alt="Fourth Pic">
+    <img src="images/sec_pic.jpeg">
+    <img src="images/third_pic.jpg">
+    <img src="images/fourth_pic.jpg">
+    <img src="images/sec_pic.jpeg">
+    <img src="images/fourth_pic.jpg">
   </div>
-  <p>Ya Allah Ya Rahman Ya Rahim, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmatMu kepada kedua mempelai ini. Kurniakanlah mereka kelak zuriat yang soleh dan solehah. Kekalkanlah jodoh mereka hingga ke jannah.</p>
-</section>
-<!--<section class="fade-in-section">
-  <p>Ya Allah Ya Rahman Ya Rahim, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmatMu kepada kedua mempelai ini. Kurniakanlah mereka kelak zuriat yang soleh dan solehah. Kekalkanlah jodoh mereka hingga ke jannah.</p>
-</section>-->
 
-<!-- ===== RSVP ===== -->
+  <h3>يا الله يا رحمن يا رحيم</h3>
+  <p style="margin-top:20px;">
+   Berkatilah majlis perkahwinan di antara dua hambamu ini. 
+   Limpahkanlah baraqah dan rahmatMu kepada kedua mempelai ini. 
+   Kurniakanlah mereka kelak zuriat yang soleh dan solehah. 
+   Kekalkanlah jodoh mereka hingga ke jannah.
+  </p>
+</section>
+
+<!-- RSVP -->
 <section class="fade-in-section">
   <h2>RSVP</h2>
   <p>Please let us know if you’ll be joining us</p>
+
   <form>
-    <input type="text" name="fullName" placeholder="Full Name" required>
-    <input type="tel" name="phone" placeholder="Phone Number" required>
-    <select name="attendance" required>
+    <input type="text" placeholder="Full Name" required>
+    <input type="tel" placeholder="Phone Number" required>
+
+    <select required>
       <option value="">Will you attend?</option>
       <option value="Yes">Yes, happily!</option>
       <option value="No">Sorry, can’t make it</option>
     </select>
-    <select name="pax">
+
+    <select>
       <option value="">Number of Pax</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
     </select>
-    <textarea name="message" placeholder="Dietary restrictions / Message (optional)"></textarea>
+
+    <textarea placeholder="Dietary restrictions / Message (optional)"></textarea>
     <button type="submit">Submit RSVP</button>
   </form>
 </section>
@@ -271,7 +288,7 @@ footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const circleWrapper = document.querySelector(".circle-wrapper");
+  const stamp = document.querySelector(".circle-wrapper");
   const leftDoor = document.querySelector(".left-door");
   const rightDoor = document.querySelector(".right-door");
   const intro = document.getElementById("introOverlay");
@@ -279,38 +296,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroText = document.querySelector(".hero-text");
   const music = document.getElementById("bgMusic");
 
-  circleWrapper.addEventListener("click", () => {
-    music.play().catch(() => console.log("User interaction required for music"));
+  stamp.addEventListener("click", () => {
+    music.play().catch(()=>{});
 
-    // Fade out stamp and text
-    circleWrapper.querySelector("img").style.opacity = 0;
-    circleWrapper.querySelector(".intro-text").style.opacity = 0;
+    stamp.style.transform="translate(-50%,-50%) scale(0.85)";
+    stamp.style.opacity="0";
 
-    // Open doors
     leftDoor.classList.add("open");
     rightDoor.classList.add("open");
 
-    // Wait until doors fully open, then show hero
-    setTimeout(() => {
+    setTimeout(()=>{
       hero.classList.add("show");
-      heroText.classList.add("visible");
-      intro.style.display = "none";
-    }, 1200);
+      setTimeout(()=>{ heroText.classList.add("visible"); },600);
+      intro.style.display="none";
+    },1200);
   });
 
-  // Scroll fade-in
-  const faders = document.querySelectorAll(".fade-in-section");
-  const options = { threshold: 0.2 };
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add("visible"); }
     });
-  }, options);
-
-  faders.forEach(fader => observer.observe(fader));
+  }, {threshold:0.2});
+  document.querySelectorAll(".fade-in-section").forEach(el=>observer.observe(el));
 });
 </script>
 
