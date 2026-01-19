@@ -20,10 +20,25 @@
 
 /* Reset */
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Poppins', sans-serif; background:var(--bg); color:#333; overflow-x:hidden; }
+body {
+  font-family:'Poppins', sans-serif;
+  background:var(--bg);
+  color:#333;
+  overflow-x:hidden;
+}
 
-section { padding:70px 20px; max-width:900px; margin:auto; text-align:center; }
-h1,h2,h3,h4,h5,h6 { font-family:'Playfair Display', serif; color:var(--primary); }
+section {
+  padding:70px 20px;
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family:'Playfair Display', serif;
+  color:var(--primary);
+}
+
 p { font-size:0.95rem; margin-bottom:10px; }
 
 /* ================= INTRO OVERLAY ================= */
@@ -70,15 +85,23 @@ p { font-size:0.95rem; margin-bottom:10px; }
   display:block;
   animation: floatStamp 3s ease-in-out infinite;
 }
-@keyframes floatStamp { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
-.intro-text { margin-top:10px; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--secondary); }
+@keyframes floatStamp {
+  0%,100%{ transform: translateY(0);}
+  50%{ transform: translateY(-6px);}
+}
+.intro-text {
+  margin-top:10px;
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--secondary);
+}
 
 /* ================= HERO ================= */
 .hero {
   position: relative;
   min-height:100vh;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
@@ -96,14 +119,12 @@ p { font-size:0.95rem; margin-bottom:10px; }
   left:50%;
   min-width:100%;
   min-height:100%;
-  width:auto;
-  height:auto;
   transform:translate(-50%, -50%);
   z-index:-1;
   object-fit:cover;
 }
 
-/* Hero text */
+/* HERO TEXT (UPDATED ONLY HERE) */
 .hero-text {
   position: relative;
   z-index:1;
@@ -114,57 +135,229 @@ p { font-size:0.95rem; margin-bottom:10px; }
   flex-direction:column;
   align-items:center;
 }
-.hero-text.visible { opacity:1; transform: translateY(0); }
-.hero-text span {
-  font-family: 'Source Serif 4', serif;
-  font-weight:400;
-  font-size:1.2rem;
-  margin-bottom:10px;
-  color:white;
-  text-transform: uppercase;
+.hero-text.visible {
+  opacity:1;
+  transform: translateY(0);
 }
-.hero-text h1 {
+
+.hero-label {
+  font-family:'Source Serif 4', serif;
+  font-size:1.1rem;
+  letter-spacing:3px;
+  margin-bottom:30px;
+  color:white;
+}
+
+.hero-names h1 {
   font-family:'Birthstone', cursive;
   font-size:4.5rem;
-  line-height:0.9;
+  line-height:0.95;
   margin:0;
   color:white;
 }
-.hero-text p {
+
+.ampersand {
+  font-family:'Playfair Display', serif;
+  font-size:1.6rem;
+  margin:6px 0;
+  color:rgba(255,255,255,0.85);
+}
+
+/* DATE AT BOTTOM */
+.hero-date {
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  z-index:1;
+  opacity:0;
+  transition: opacity 1s ease;
+}
+.hero.show .hero-date { opacity:1; }
+
+.hero-date p {
   font-family:'Source Serif 4', serif;
   font-size:1.2rem;
-  margin-top:10px;
+  margin:4px 0;
   color:white;
 }
 
 /* ================= FADE-IN SECTIONS ================= */
-.fade-in-section { opacity:0; transform:translateY(30px); transition: opacity 1s ease-out, transform 1s ease-out; }
-.fade-in-section.visible { opacity:1; transform:translateY(0); }
+.fade-in-section {
+  opacity:0;
+  transform:translateY(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.fade-in-section.visible {
+  opacity:1;
+  transform:translateY(0);
+}
 
 /* ================= DETAILS & RSVP ================= */
 .details p strong { color: var(--primary); }
-form { max-width:500px; margin:auto; text-align:left; }
-input,select,textarea,button { width:100%; padding:12px; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; font-family:inherit; font-size:0.9rem; }
-button { background:var(--primary); color:white; border:none; cursor:pointer; transition:0.3s; }
+
+form {
+  max-width:500px;
+  margin:auto;
+  text-align:left;
+}
+
+input,select,textarea,button {
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-family:inherit;
+  font-size:0.9rem;
+}
+
+button {
+  background:var(--primary);
+  color:white;
+  border:none;
+  cursor:pointer;
+  transition:0.3s;
+}
 button:hover { background:var(--secondary); }
 
-footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
+footer {
+  padding:40px 20px;
+  font-size:0.85rem;
+  color:#777;
+  text-align:center;
+}
+
+
+
+/* ================= CONTACT US ================= */
+.contact-us {
+  padding-top:50px;
+  padding-bottom:50px;
+}
+
+.contact-us h2 {
+  margin-bottom:20px;
+}
+
+.contact-us p {
+  margin-bottom:10px;
+  font-family:'Source Serif 4', serif;
+  color:#333;
+}
+
+.contact-card {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.contact-card img {
+  width:30px;
+  height:30px;
+  margin-bottom:10px;
+}
+
+.contact-card a {
+  color:var(--primary);
+  text-decoration:none;
+  font-weight:500;
+}
+
+.contact-card a:hover {
+  text-decoration:underline;
+}
+
+/* Mobile tweak */
+@media(max-width:768px){
+  .contact-card img { width:35px; height:35px; }
+}
+
+
+/* ================= COUNTDOWN ================= */
+.countdown {
+  padding:50px 20px;
+}
+
+.countdown h2 {
+  margin-bottom:30px;
+}
+
+.countdown-timer {
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  flex-wrap:wrap;
+}
+
+.time-box {
+  background:var(--primary);
+  color:white;
+  padding:15px 20px;
+  border-radius:10px;
+  min-width:80px;
+}
+
+.time-box span {
+  font-size:2rem;
+  font-weight:bold;
+  display:block;
+  text-align:center;
+}
+
+.time-box p {
+  margin:5px 0 0 0;
+  font-size:0.9rem;
+  text-align:center;
+}
+
+/* Mobile tweak */
+@media(max-width:768px){
+  .countdown-timer {
+    gap:15px;
+  }
+  .time-box {
+    min-width:60px;
+    padding:10px 15px;
+  }
+  .time-box span {
+    font-size:1.5rem;
+  }
+  .time-box p {
+    font-size:0.8rem;
+  }
+}
+
+
 
 /* ================= PHOTO GALLERY ================= */
-.photo-gallery { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:10px; padding:20px 0; }
-.photo-gallery img { flex:0 0 auto; width:250px; height:150px; object-fit:cover; scroll-snap-align:start; border-radius:8px; transition: transform 0.3s ease; }
-.photo-gallery img:hover { transform: scale(1.05); }
+.photo-gallery {
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  gap:10px;
+  padding:20px 0;
+}
+.photo-gallery img {
+  flex:0 0 auto;
+  width:250px;
+  height:150px;
+  object-fit:cover;
+  scroll-snap-align:start;
+  border-radius:8px;
+}
 
-/* ================= MOBILE ================= */
+/* MOBILE */
 @media(max-width:768px){
   .circle-wrapper img { width:150px; }
-  .hero-text h1 { font-size:3rem; }
-  .hero-text p { font-size:1rem; }
-  h1 { font-size:2.2rem; }
-  h2 { font-size:1.5rem; }
+  .hero-names h1 { font-size:3rem; }
+  .hero-date p { font-size:1rem; }
 }
 </style>
 </head>
+
 <body>
 
 <!-- INTRO OVERLAY -->
@@ -183,29 +376,37 @@ footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
   <source src="turning_page.mp3" type="audio/mpeg">
 </audio>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section class="hero fade-in-section">
   <div class="hero-video">
     <video autoplay muted loop playsinline>
       <source src="images/first_vid.mp4" type="video/mp4">
-      Your browser does not support the video tag.
     </video>
   </div>
 
   <div class="hero-text">
-    <span>The wedding of</span>
-    <h1>Fakhirah & Adib</h1>
+    <span class="hero-label">THE WEDDING OF</span>
+    <div class="hero-names">
+      <h1>Fakhirah</h1>
+      <div class="ampersand">&</div>
+      <h1>Adib Aiman</h1>
+    </div>
+  </div>
+
+  <div class="hero-date">
     <p>Saturday, 2 May 2026</p>
     <p>15 Zulkaedah, 1447H</p>
   </div>
 </section>
 
-<!-- STORY SECTION -->
+<!-- STORY SECTION (UNCHANGED) -->
 <section class="fade-in-section">
   <h2 style="padding-bottom:2em;">بِسْــــــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</h2>
+
   <h4>NIK ZALIDA BINTI ISMAIL</h4>
   <p>dan</p>
   <h4>KELUARGA</h4>
+
   <p>
     dengan penuh rasa hormat dan berbesar hati ingin menjemput
     Dato’ Seri/ Datin Seri/ Dato’/ Datin/ Tuan/ Puan/ Encik/ Cik
@@ -228,13 +429,38 @@ footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
 
 <!-- DETAILS -->
 <section class="details fade-in-section">
-  <h2 style="padding-bottom: 2em;">ATUR CARA MAJLIS</h2>
-  <p><strong>11.00 AM: </strong> Jamuan makan</p>
-  <p><strong>12.30 PM: </strong> Ketibaan pengantin</p>
-  <p><strong>1.30 PM: </strong> Makan Beradab</p>
-  <p><strong>2.00 PM: </strong> Sesi Fotografi</p>
+  <h2 style="padding-bottom:2em;">ATUR CARA MAJLIS</h2>
+  <p><strong>11.00 AM:</strong> Jamuan makan</p>
+  <p><strong>12.30 PM:</strong> Ketibaan pengantin</p>
+  <p><strong>1.30 PM:</strong> Makan Beradab</p>
+  <p><strong>2.00 PM:</strong> Sesi Fotografi</p>
   <p><strong>4.00 PM</strong> Majlis tamat</p>
 </section>
+
+
+<!-- COUNTDOWN -->
+<section class="fade-in-section countdown">
+  <h2>Counting Days and Minutes:</h2>
+  <div class="countdown-timer">
+    <div class="time-box">
+      <span id="days">0</span>
+      <p>Days</p>
+    </div>
+    <div class="time-box">
+      <span id="hours">0</span>
+      <p>Hours</p>
+    </div>
+    <div class="time-box">
+      <span id="minutes">0</span>
+      <p>Minutes</p>
+    </div>
+    <div class="time-box">
+      <span id="seconds">0</span>
+      <p>Seconds</p>
+    </div>
+  </div>
+</section>
+
 
 <!-- PHOTOS -->
 <section class="fade-in-section">
@@ -248,10 +474,10 @@ footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
 
   <h3>يا الله يا رحمن يا رحيم</h3>
   <p style="margin-top:20px;">
-   Berkatilah majlis perkahwinan di antara dua hambamu ini. 
-   Limpahkanlah baraqah dan rahmatMu kepada kedua mempelai ini. 
-   Kurniakanlah mereka kelak zuriat yang soleh dan solehah. 
-   Kekalkanlah jodoh mereka hingga ke jannah.
+    Berkatilah majlis perkahwinan di antara dua hambamu ini.
+    Limpahkanlah baraqah dan rahmatMu kepada kedua mempelai ini.
+    Kurniakanlah mereka kelak zuriat yang soleh dan solehah.
+    Kekalkanlah jodoh mereka hingga ke jannah.
   </p>
 </section>
 
@@ -282,6 +508,29 @@ footer { padding:40px 20px; font-size:0.85rem; color:#777; text-align:center; }
   </form>
 </section>
 
+
+<!-- CONTACT US -->
+<section class="fade-in-section contact-us">
+  <h2>Contact Us</h2>
+  <p>If you have any questions, feel free to reach out to our family members:</p>
+
+  <div class="contact-card">
+    <img src="images/wa_icon.png" alt="WhatsApp Icon">
+    <p><strong>Nik Muhammad Irfan</strong><br>
+       <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a>
+    </p>
+  </div>
+
+  <div class="contact-card">
+    <img src="images/wa_icon.png" alt="WhatsApp Icon">
+    <p><strong>Nik Muhammad Izzat</strong><br>
+       <a href="https://wa.me/60123456780" target="_blank">+60 12-345 6780</a>
+    </p>
+  </div>
+</section>
+
+
+
 <footer class="fade-in-section">
   <p>We can’t wait to celebrate our special day with you 🤍</p>
 </footer>
@@ -298,16 +547,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   stamp.addEventListener("click", () => {
     music.play().catch(()=>{});
-
-    stamp.style.transform="translate(-50%,-50%) scale(0.85)";
     stamp.style.opacity="0";
-
     leftDoor.classList.add("open");
     rightDoor.classList.add("open");
 
     setTimeout(()=>{
       hero.classList.add("show");
-      setTimeout(()=>{ heroText.classList.add("visible"); },600);
+      heroText.classList.add("visible");
       intro.style.display="none";
     },1200);
   });
@@ -317,10 +563,34 @@ document.addEventListener("DOMContentLoaded", () => {
       if(entry.isIntersecting){ entry.target.classList.add("visible"); }
     });
   }, {threshold:0.2});
+
   document.querySelectorAll(".fade-in-section").forEach(el=>observer.observe(el));
 });
+
+// Countdown timer
+function updateCountdown() {
+  const weddingDate = new Date("May 2, 2026 11:00:00").getTime();
+  const now = new Date().getTime();
+  const distance = weddingDate - now;
+
+  if(distance < 0) return; // Stop if date passed
+
+  const days = Math.floor(distance / (1000*60*60*24));
+  const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+  const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}
+
+// Update every second
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
 </script>
 
 </body>
 </html>
-
