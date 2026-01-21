@@ -12,10 +12,10 @@
 
 <style>
 :root {
-  --bg: #faf7f2;
+  /*--bg: #faf7f2;*/
+  --bg:#F2EED7;
   --door-color: #faf7f2;
-  /*--primary: #6b4f3f;*/
-  --primary: #CC561E;
+  --primary: #CA7842;
   --secondary: #a1866f;
 }
 
@@ -370,6 +370,150 @@ footer {
   .hero-names h1 { font-size:3rem; }
   .hero-date p { font-size:1rem; }
 }
+
+
+
+/* ================= BOTTOM NAV ================= */
+#bottomNav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:70px;
+  background:rgba(250,247,242,.96);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  box-shadow:0 -4px 12px rgba(0,0,0,.08);
+  z-index:9998;
+  opacity:0;
+  transform:translateY(100%);
+  transition:.6s ease;
+}
+#bottomNav.show{
+  opacity:1;
+  transform:translateY(0);
+}
+#bottomNav a{
+  font-size:1.6rem;
+  color:var(--primary);
+  text-decoration:none;
+}
+#bottomNav img{width:28px;}
+
+@media(max-width:768px){
+  .hero-names h1{font-size:3rem;}
+  .circle-wrapper img{width:150px;}
+}
+
+
+
+/* ================= GIFT (QR) POPUP BOX ================= */
+.gift-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.gift-modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gift-modal-content {
+  background: #fff;
+  padding: 35px 25px;
+  max-width: 360px;
+  width: 90%;
+  border-radius: 18px;
+  text-align: center;
+  position: relative; /* needed for absolute close button */
+  animation: scaleIn 0.4s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.gift-modal-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  margin-top:25px;
+  color: var(--primary);
+  line-height: 1.3;
+}
+
+.gift-qr {
+  width: 200px;
+  max-width: 80%;
+  margin: 15px auto 20px;
+  display: block;
+}
+
+.bank-info {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.4;
+}
+
+.acc-number {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  color: var(--primary);
+  display: block;
+  margin-top: 5px;
+}
+
+/* Close button pinned to top-right of popup box */
+.gift-close {
+  position: absolute;       /* pin inside gift-modal-content */
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #999;
+  line-height: 1;
+  padding: 0;
+  display: flex;            /* center the × inside square */
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.gift-close:hover {
+  color: var(--primary);
+}
+
+/* Responsive tweaks for smaller screens */
+@media(max-width: 480px) {
+  .gift-modal-content {
+    padding: 25px 15px;
+  }
+  .gift-qr {
+    width: 150px;
+  }
+  .gift-close {
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+  }
+}
+
 </style>
 </head>
 
@@ -471,7 +615,7 @@ footer {
     </div>
     <div class="time-box">
       <span id="seconds">0</span>
-      <p>Secs</p>
+      <p>Seconds</p>
     </div>
   </div>
 </section>
@@ -537,7 +681,7 @@ footer {
 
 
 <!-- CONTACT US -->
-<section class="fade-in-section contact-us">
+<section id="contact" class="fade-in-section contact-us">
   <h2>Contact Us</h2>
   <p>If you have any questions, feel free to reach out to our family members:</p>
 
@@ -562,6 +706,35 @@ footer {
   <p>We can’t wait to celebrate our special day with you 🤍</p>
 </footer>
 
+
+
+<!-- BOTTOM NAV -->
+<nav id="bottomNav">
+  <a href="#contact"><img src="images/call_icon.png"></a>
+  <a href="#" id="giftBtn"><img src="images/gift_icon.png"></a>
+  <a href="#location"><img src="images/location_icon.png"></a>
+</nav>
+
+
+<!-- GIFT POPUP -->
+<div id="giftModal" class="gift-modal">
+  <div class="gift-modal-content">
+    <button class="gift-close">&times;</button>
+
+    <h3>We accept your gift for us to start our new life with open heart</h3>
+
+    <img src="images/qr_uob.png" alt="Gift QR Code" class="gift-qr">
+
+    <p class="bank-info">
+      <strong>Bank:</strong>UOB (United Overseas Bank)<br>
+      <strong>Account Name:</strong> Nik Nurulfakhirah Shamsul Z.<br>
+      <strong>Account Number:</strong><br>
+      <span class="acc-number">910-363-517-5</span>
+    </p>
+  </div>
+</div>
+
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const stamp = document.querySelector(".circle-wrapper");
@@ -571,6 +744,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".hero");
   const heroText = document.querySelector(".hero-text");
   const music = document.getElementById("bgMusic");
+  const nav=document.getElementById("bottomNav");
 
   stamp.addEventListener("click", () => {
     music.play().catch(()=>{});
@@ -594,9 +768,53 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".fade-in-section").forEach(el=>observer.observe(el));
 });
 
+
+// Bottom Nav
+let lastScrollY = window.scrollY;
+const nav = document.getElementById("bottomNav");
+
+window.addEventListener("scroll", () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY > 200) {
+    if (currentScrollY > lastScrollY) {
+      nav.classList.add("show");   // scrolling down
+    } else {
+      nav.classList.remove("show"); // scrolling up
+    }
+  } else {
+    nav.classList.remove("show");   // near top
+  }
+
+  lastScrollY = currentScrollY;
+});
+
+
+// Gift POPUP box logic
+const giftBtn = document.getElementById("giftBtn");
+const giftModal = document.getElementById("giftModal");
+const giftClose = document.querySelector(".gift-close");
+
+giftBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  giftModal.classList.add("show");
+});
+
+giftClose.addEventListener("click", () => {
+  giftModal.classList.remove("show");
+});
+
+// Close when clicking outside the box
+giftModal.addEventListener("click", (e) => {
+  if (e.target === giftModal) {
+    giftModal.classList.remove("show");
+  }
+});
+
+
 // Countdown timer
 function updateCountdown() {
-  const weddingDate = new Date("May 2, 2026 11:00:00").getTime();
+  const weddingDate = new Date("May 2, 2026 00:00:00").getTime();
   const now = new Date().getTime();
   const distance = weddingDate - now;
 
@@ -621,5 +839,3 @@ updateCountdown();
 
 </body>
 </html>
-
-
