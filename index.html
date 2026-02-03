@@ -17,6 +17,8 @@
   --door-color: #faf7f2;
   --primary: #CA7842;
   --secondary: #a1866f;
+  --section-light: #F2EED7;  /* cream */
+  --section-dark:  #CA7842;  /* terracotta */
 }
 
 /* Reset */
@@ -196,7 +198,9 @@ p { font-size:0.95rem; margin-bottom:10px; }
 }
 
 /* ================= DETAILS & RSVP ================= */
-.details p strong { color: var(--primary); }
+.details p strong { 
+  color: var(--primary); 
+}
 
 form {
   max-width:500px;
@@ -514,6 +518,49 @@ footer {
   }
 }
 
+
+/* ================= DIFFERENT SECTIONS ================= */
+.section-dark {
+  background: var(--section-dark);
+  color: #fff --primary;
+  padding-top: 100px;
+}
+
+.section-dark h1,
+.section-dark h2,
+.section-dark h3,
+.section-dark h4,
+.section-dark h5,
+.section-dark h6,
+.section-dark p {
+  color: #fff;
+}
+
+.section-light {
+  background: var(--section-light);
+  padding-top: 100px;
+}
+
+
+/* ================= TORN PAPER ================= */
+.torn-divider {
+  width: 100%;
+  height: 90px; /* adjust according to your torn image height */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;      /* allow overlap */
+  z-index: 1;              /* sit above the next section */
+  margin-bottom: -45px;    /* negative margin to pull next section up */
+}
+
+/* Ensure sections don't hide torn divider */
+section {
+  position: relative;
+  z-index: 0;
+}
+
+
 </style>
 </head>
 
@@ -559,7 +606,7 @@ footer {
 </section>
 
 <!-- STORY SECTION (UNCHANGED) -->
-<section class="fade-in-section">
+<section class="fade-in-section section-light">
   <h2 style="padding-bottom:2em;">بِسْــــــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</h2>
 
   <h4>NIK ZALIDA BINTI ISMAIL</h4>
@@ -586,8 +633,12 @@ footer {
   <p>11.00 pagi – 4.00 petang</p>
 </section>
 
+<!-- Torn Divider (light to dark) -->
+<div class="torn-divider" style="background-image: url('images/torn-light.png');"></div>
+
+
 <!-- DETAILS -->
-<section class="details fade-in-section">
+<section class="details fade-in-section section-dark">
   <h2 style="padding-bottom:2em;">ATUR CARA MAJLIS</h2>
   <p><strong>11.00 AM:</strong> Jamuan makan</p>
   <p><strong>12.30 PM:</strong> Ketibaan pengantin</p>
@@ -596,9 +647,12 @@ footer {
   <p><strong>4.00 PM</strong> Majlis tamat</p>
 </section>
 
+<!-- Torn Divider (dark to light) -->
+<div class="torn-divider" style="background-image: url('images/torn-dark.png');"></div>
+
 
 <!-- COUNTDOWN -->
-<section class="fade-in-section countdown">
+<section class="fade-in-section countdown section-light">
   <h2>Counting Days and Minutes:</h2>
   <div class="countdown-timer">
     <div class="time-box">
@@ -619,10 +673,12 @@ footer {
     </div>
   </div>
 </section>
+<!-- Torn Divider (light to dark) -->
+<div class="torn-divider" style="background-image: url('images/torn-light.png');"></div>
 
 
 <!-- PHOTOS -->
-<section class="fade-in-section">
+<section class="fade-in-section section-dark">
   <div class="photo-gallery">
     <img src="images/sec_pic.jpeg">
     <img src="images/third_pic.jpg">
@@ -639,9 +695,13 @@ footer {
     Kekalkanlah jodoh mereka hingga ke jannah.
   </p>
 </section>
+<!-- Torn Divider (dark to light) -->
+<div class="torn-divider" style="background-image: url('images/torn-dark.png');"></div>
+
+
 
 <!-- RSVP -->
-<section class="fade-in-section">
+<section class="fade-in-section section-light">
   <h2>RSVP</h2>
   <p>Please let us know if you’ll be joining us</p>
 
@@ -666,10 +726,12 @@ footer {
     <button type="submit">Submit RSVP</button>
   </form>
 </section>
+<!-- Torn Divider (light to dark) -->
+<div class="torn-divider" style="background-image: url('images/torn-light.png');"></div>
 
 
 <!-- MAP LOCATION -->
-<section class="fade-in-section map-section">
+<section class="fade-in-section map-section section-light">
   <h2>Wedding Venue Location</h2>
   <p>Grandeur Beling Glasshall, Sg. Buloh, Selangor</p>
   <div class="map-container">
@@ -677,11 +739,13 @@ footer {
   width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </section>
+<!-- Torn Divider (light to dark) -->
+<div class="torn-divider" style="background-image: url('images/torn-light.png');"></div>
 
 
 
 <!-- CONTACT US -->
-<section id="contact" class="fade-in-section contact-us">
+<section id="contact" class="fade-in-section contact-us section-dark">
   <h2>Contact Us</h2>
   <p>If you have any questions, feel free to reach out to our family members:</p>
 
@@ -699,6 +763,8 @@ footer {
     </p>
   </div>
 </section>
+<!-- Torn Divider (dark to light) -->
+<div class="torn-divider" style="background-image: url('images/torn-dark.png');"></div>
 
 
 
@@ -727,7 +793,7 @@ footer {
 
     <p class="bank-info">
       <strong>Bank:</strong>UOB (United Overseas Bank)<br>
-      <strong>Account Name:</strong> Nik Nurulfakhirah Shamsul Z.<br>
+      <strong>Name:</strong> Nik Nurulfakhirah Shamsul Z.<br>
       <strong>Account Number:</strong><br>
       <span class="acc-number">910-363-517-5</span>
     </p>
