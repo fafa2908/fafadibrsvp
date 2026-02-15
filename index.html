@@ -132,7 +132,8 @@ p { font-size:0.95rem; margin-bottom:10px; }
   position: relative;
   z-index:1;
   opacity:0;
-  transform: translateY(30px);
+  /*transform: translateY(30px);*/
+  transform: translateY(10px);
   transition: opacity 1s ease, transform 1s ease;
   display:flex;
   flex-direction:column;
@@ -147,13 +148,15 @@ p { font-size:0.95rem; margin-bottom:10px; }
   font-family:'Source Serif 4', serif;
   font-size:1.1rem;
   letter-spacing:3px;
-  margin-bottom:30px;
+  /*margin-bottom:30px;*/
+  margin-bottom:15px;   /* reduce space below */
+  margin-top:-40px;  
   color:white;
 }
 
 .hero-names h1 {
   font-family:'Birthstone', cursive;
-  font-size:4.5rem;
+  font-size:5.5rem;
   line-height:0.95;
   margin:0;
   color:white;
@@ -380,7 +383,7 @@ footer {
 /* MOBILE */
 @media(max-width:768px){
   .circle-wrapper img { width:150px; }
-  .hero-names h1 { font-size:3rem; }
+  .hero-names h1 { font-size:3.8rem; }
   .hero-date p { font-size:1rem; }
 }
 
